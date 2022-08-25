@@ -13,3 +13,14 @@ class FlatAdmin(admin.ModelAdmin):
     readonly_fields = [
         'created_at',
     ]
+    list_display = [
+        'address',
+        'price',
+        'is_new_building',
+        'construction_year',
+        'town',
+
+    ]
+    list_editable = [
+        'is_new_building'
+    ]
