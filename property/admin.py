@@ -29,6 +29,9 @@ class FlatAdmin(admin.ModelAdmin):
         'rooms_number',
         'has_balcony'
     ]
+    raw_id_fields = [
+        'like'
+    ]
 
 
 @admin.register(Complaint)
