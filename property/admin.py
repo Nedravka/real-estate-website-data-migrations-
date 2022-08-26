@@ -24,3 +24,8 @@ class FlatAdmin(admin.ModelAdmin):
     list_editable = [
         'is_new_building'
     ]
+    list_filter = [
+        'is_new_building',
+        'rooms_number',
+        'has_balcony'
+    ]
