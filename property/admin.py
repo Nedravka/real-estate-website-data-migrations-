@@ -3,6 +3,14 @@ from django.contrib import admin
 from .models import Complaint, Flat, Owner
 
 
+class FlatInLine(admin.TabularInline):
+    model = Owner.flat.through
+    raw_id_fields = [
+        'flat',
+        'owner'
+    ]
+
+
 @admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
     search_fields = [
@@ -32,6 +40,9 @@ class FlatAdmin(admin.ModelAdmin):
     raw_id_fields = [
         'like'
     ]
+    inlines = [
+        FlatInLine,
+    ]
 
 
 @admin.register(Complaint)
@@ -46,3 +57,7 @@ class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = [
         'flat'
     ]
+    inlines = [
+        FlatInLine,
+    ]
+    exclude = ['flat']
