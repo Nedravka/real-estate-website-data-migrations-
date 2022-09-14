@@ -53,7 +53,7 @@ class Flat(models.Model):
         'Новое здание',
         null=True,
         blank=True)
-    like = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='Кто лайкнул')
+    like = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='Кто лайкнул', blank=True)
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
