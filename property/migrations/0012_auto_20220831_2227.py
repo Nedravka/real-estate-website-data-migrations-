@@ -6,11 +6,13 @@ from django.db import migrations
 def parse_flats_to_owner(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
-    cached_owners = list(Owner.objects.all())
+    cached_owners = Owner.objects.all()
     flats = Flat.objects.all()
     cached_flats = [(flat.pk, flat.owner, flat.owner_pure_phone) for flat in flats]
-    for owner in cached_owners:
-        flats = [pk for pk, name, phonenumber in cached_flats if owner.name == name and owner.pure_phonenumber == phonenumber]
+
+    for owner in cached_owners.iterator():
+
+        flats = (pk for pk, name, phonenumber in cached_flats if owner.name == name and owner.pure_phonenumber == phonenumber)
         owner.flat.set(flats)
 
 

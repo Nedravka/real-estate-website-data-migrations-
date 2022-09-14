@@ -9,7 +9,7 @@ def get_normilize_phonenumber(apps, schema_editor):
 
     Flat = apps.get_model('property', 'Flat')
     flats = Flat.objects.all()
-    for flat in flats:
+    for flat in flats.iterator():
         phonenumber = phonenumbers.parse(flat.owners_phonenumber, 'RU')
         if phonenumbers.is_valid_number(phonenumber):
             flat.owner_pure_phone = phonenumbers.format_number(phonenumber, PhoneNumberFormat.E164)
@@ -21,7 +21,7 @@ def get_normilize_phonenumber(apps, schema_editor):
 def get_back(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     flats = Flat.objects.all()
-    for flat in flats:
+    for flat in flats.iterator():
         flat.owner_pure_phone = None
         flat.save()
 
